@@ -1,26 +1,31 @@
 import { useState } from 'react';
-import {Card, MainLogo, Button, Tweets, Followers, Text, Line, BoxAvatar, Avatar, BgImg, ButtonFollowing} from './UserCard.styled';
+import { Card, MainLogo, Button, Tweets, Followers, Text, Line, BoxAvatar, Avatar, BgImg, ButtonFollowing } from './UserCard.styled';
+import PropTypes from 'prop-types';
+import { usersApi } from '../../servises/UsersApi';
 
-export const UserCard = ({userData}) => {
-    const { avatar, tweets, followers, user } = userData;
-    const [isFollowing, setIsFollowing] = useState(false);
-    const [followerCount, setFollowerCount] = useState(followers);
-    
+export const UserCard = ({ userData }) => {
+    const { id, avatar, tweets, followers, user, following } = userData;
+    const [followStatus, setFollowStatus] = useState(following);
+    const [followQty, setFollowQty] = useState(followers);
 
     const formattedTweets = tweets.toLocaleString('en-US');
-  const formattedFollowers = followerCount.toLocaleString('en-US');
+    const formattedFollowers = followQty.toLocaleString('en-US');
 
-    const followButtonText = isFollowing ? 'FOLLOWING' : 'FOLLOW';
+    const followButtonText = followStatus ? 'FOLLOWING' : 'FOLLOW';
 
-    const handleFollowToggle = () => {
-        if (isFollowing) {
-            setFollowerCount(prevCount => prevCount - 1);
-        } else {
-            setFollowerCount(prevCount => prevCount + 1);
-        }
-        setIsFollowing(prevStatus => !prevStatus);
-    };
+    const handleFollowToggle = async () => {
+    setFollowStatus(!followStatus);
 
+    try {
+        const {data} = await usersApi.put(`/users/${id}`, {
+        following: !followStatus,
+        followers: followQty + (followStatus ? -1 : 1),
+    });
+        setFollowQty(data.followers);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
     return(
         <Card>
@@ -35,7 +40,19 @@ export const UserCard = ({userData}) => {
                 <Tweets> {formattedTweets} tweets</Tweets>
                 <Followers>{formattedFollowers} Followers</Followers>
             </Text>
-            {isFollowing ? (<ButtonFollowing onClick={handleFollowToggle} >{followButtonText}</ButtonFollowing >) : (<Button onClick={handleFollowToggle} >{followButtonText}</Button >)}
+            {followStatus ? (<ButtonFollowing onClick={() => handleFollowToggle(id)} >{followButtonText}</ButtonFollowing >) : (<Button onClick={handleFollowToggle} >{followButtonText}</Button >)}
         </Card>
     )
 }
+
+
+UserCard.propTypes = {
+    userData: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+        tweets: PropTypes.number.isRequired,
+        followers: PropTypes.number.isRequired,
+        user: PropTypes.string.isRequired,
+        following: PropTypes.bool,
+    }),
+};

@@ -7,19 +7,21 @@ const usersSlice = createSlice({
     name: 'users',
     initialState: usersInitState,
     extraReducers: builder => {
-        builder
+      builder
         .addCase(getUsersThunk.pending, state => {
-            state.status = STATUS.loading;
+          state.status = STATUS.loading;
         })
         .addCase(getUsersThunk.fulfilled, (state, { payload }) => {
-            state.status = STATUS.success;
-            state.users = payload; 
+            if (state.status === STATUS.loading) {
+                state.status = STATUS.success;
+                state.users = state.users ? state.users.concat(payload) : payload;
+              }
         })
         .addCase(getUsersThunk.rejected, state => {
-            state.status = STATUS.error;
-        })
+          state.status = STATUS.error;
+        });
     },
-});
+  });
 
 
 export const usersReducer = usersSlice.reducer;

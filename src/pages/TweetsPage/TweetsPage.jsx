@@ -13,20 +13,19 @@ const TweetsPage = () => {
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState(STATUS.idle);
   const users = useSelector(state => state.users.users);
+  const renderedPages = useSelector(state => state.users.renderedPages);
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const handleLoadMore = () => {
-    setPage(prev => prev + 1);
-    dispatch(getUsersThunk(page + 1));
-  };
-
   useEffect(() => {
-    setStatus(STATUS.loading);
-    dispatch(getUsersThunk())
-      .then(() => setStatus(STATUS.idle))
-      .catch(() => setStatus(STATUS.error));
-  }, [dispatch]);
+    if (renderedPages < page) {
+      dispatch(getUsersThunk(page));
+    }
+  }, [dispatch, page, renderedPages]);
+
+  const handleLoadMore = () => {
+    setPage(prev => (prev + 1));
+  };
 
   return (
     <div>
@@ -35,10 +34,10 @@ const TweetsPage = () => {
       </BtnGoHome>
       <UserList />
       {status === STATUS.loading ? (
-        <Loader />
+        <Loader/>
       ) : users && users.length > 0 ? (
         <BtnLoadMore onClick={handleLoadMore}>LOAD MORE</BtnLoadMore>
-      ) : null}
+      ) : ''}
     </div>
   );
 };

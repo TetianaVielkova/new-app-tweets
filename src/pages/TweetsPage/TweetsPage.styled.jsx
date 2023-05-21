@@ -50,5 +50,6 @@ export const BtnLoadMore  = styled.button`
     &:hover,
     &:focus{
     color: #5CD3A8;
+    background: #4B0082;
     transform: scale(1.05);
 `

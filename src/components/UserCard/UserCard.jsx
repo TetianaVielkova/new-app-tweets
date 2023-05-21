@@ -15,7 +15,6 @@ export const UserCard = ({ userData }) => {
 
     const handleFollowToggle = async () => {
     setFollowStatus(!followStatus);
-
     try {
         const {data} = await usersApi.put(`/users/${id}`, {
         following: !followStatus,
@@ -26,6 +25,8 @@ export const UserCard = ({ userData }) => {
         console.log(error);
     }
 };
+
+
 
     return(
         <Card>

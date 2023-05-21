@@ -17,7 +17,7 @@ const usersSlice = createSlice({
         })
         .addCase(getUsersThunk.rejected, state => {
             state.status = STATUS.error;
-        });
+        })
     },
 });
 

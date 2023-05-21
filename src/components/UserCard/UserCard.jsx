@@ -1,10 +1,26 @@
-import {Card, MainLogo, Button, Tweets, Followers, Text, Line, BoxAvatar, Avatar, BgImg} from './UserCard.styled';
+import { useState } from 'react';
+import {Card, MainLogo, Button, Tweets, Followers, Text, Line, BoxAvatar, Avatar, BgImg, ButtonFollowing} from './UserCard.styled';
 
 export const UserCard = ({userData}) => {
     const { avatar, tweets, followers, user } = userData;
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [followerCount, setFollowerCount] = useState(followers);
+    
 
     const formattedTweets = tweets.toLocaleString('en-US');
-    const formattedFollowers = followers.toLocaleString('en-US');
+  const formattedFollowers = followerCount.toLocaleString('en-US');
+
+    const followButtonText = isFollowing ? 'FOLLOWING' : 'FOLLOW';
+
+    const handleFollowToggle = () => {
+        if (isFollowing) {
+            setFollowerCount(prevCount => prevCount - 1);
+        } else {
+            setFollowerCount(prevCount => prevCount + 1);
+        }
+        setIsFollowing(prevStatus => !prevStatus);
+    };
+
 
     return(
         <Card>
@@ -19,7 +35,7 @@ export const UserCard = ({userData}) => {
                 <Tweets> {formattedTweets} tweets</Tweets>
                 <Followers>{formattedFollowers} Followers</Followers>
             </Text>
-            <Button >FOLLOW</Button >
+            {isFollowing ? (<ButtonFollowing onClick={handleFollowToggle} >{followButtonText}</ButtonFollowing >) : (<Button onClick={handleFollowToggle} >{followButtonText}</Button >)}
         </Card>
     )
 }

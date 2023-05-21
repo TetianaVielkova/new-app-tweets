@@ -3,8 +3,6 @@ import { UserCard } from '../UserCard/UserCard';
 import { CardItem, CardList} from './UserList.styled';
 
 
-
-
 export const UserList = () => {
     const users = useSelector(state => state.users.users);
 

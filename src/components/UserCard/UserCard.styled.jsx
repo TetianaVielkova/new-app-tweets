@@ -54,9 +54,6 @@ export const Button = styled.button`
     margin-right: auto;
     margin-left: auto; 
     margin-top: 20px;
-
-    display: flex;
-    flex-direction: row;
     justify-content: flex-end;
     align-items: center;
 
@@ -66,6 +63,24 @@ export const Button = styled.button`
     font-size: 18px;
 
     background: #EBD8FF;
+    box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+    border-radius: 10.3108px;
+    margin-bottom: 36px;
+    
+`
+export const ButtonFollowing = styled.button`
+    margin-right: auto;
+    margin-left: auto; 
+    margin-top: 20px;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 14px 39px;
+    color: #373737;
+    font-weight: 600;
+    font-size: 18px;
+
+    background: #5CD3A8;
     box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
     border-radius: 10.3108px;
     margin-bottom: 36px;

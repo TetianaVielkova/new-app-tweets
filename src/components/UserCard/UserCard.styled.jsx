@@ -35,22 +35,25 @@ export const Line = styled.div`
     box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06), inset 0px -1.71846px 3.43693px #AE7BE3, inset 0px 3.43693px 2.5777px #FBF8FF;
 `
 export const BoxAvatar = styled.div`
-    position: absolute;
-    overflow: hidden;
-    width: 80px;
-    height: 80px;
-    border: 8px solid #EBD8FF;
-    background:  linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%);
-    box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06), inset 0px -2.19582px 4.39163px #AE7BE3, inset 0px 4.39163px 3.29372px #FBF8FF;
-    border-radius: 13.1749px;
-    border-radius: 50%;
-    margin-top: -52px;
-    left: 138px;
+display: block;
+background: #ebd8ff;
+height: 8px;
+width: 100%;
+position: absolute;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
 `
 export const Avatar = styled.img`
-    object-fit: cover;
-    width: 80px;
-    height: 80px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+object-fit: contain;
+width: 62px;
+height: 62px;
+border-radius: 50%;
+border: 8px solid #ebd8ff;
 `
 
 export const Button = styled.button`

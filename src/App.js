@@ -9,7 +9,7 @@ function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-          <Route path='/' index element={<HomePage />} />
+          <Route index element={<HomePage />} />
           <Route path="/tweets" element={<TweetsPage />} />
           <Route path="*" element={<HomePage />} />/
       </Routes>

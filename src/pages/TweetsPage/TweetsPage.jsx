@@ -37,7 +37,7 @@ const TweetsPage = () => {
         <Loader/>
       ) : users && users.length > 0 ? (
         <BtnLoadMore onClick={handleLoadMore}>LOAD MORE</BtnLoadMore>
-      ) : ''}
+      ) : '' }
     </div>
   );
 };

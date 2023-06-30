@@ -53,7 +53,7 @@ UserCard.propTypes = {
         avatar: PropTypes.string.isRequired,
         tweets: PropTypes.number.isRequired,
         followers: PropTypes.number.isRequired,
-        user: PropTypes.string.isRequired,
+        user: PropTypes.string,
         following: PropTypes.bool,
     }),
 };

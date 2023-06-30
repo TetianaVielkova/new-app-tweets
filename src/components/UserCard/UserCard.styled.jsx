@@ -69,7 +69,9 @@ export const Button = styled.button`
     box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
     border-radius: 10.3108px;
     margin-bottom: 36px;
-    
+    :hover {
+        box-shadow: inset 0 0 3px 3px #5cd3a8, 0 0 3px 3px #373737;
+    }
 `
 export const ButtonFollowing = styled.button`
     margin-right: auto;
@@ -87,7 +89,9 @@ export const ButtonFollowing = styled.button`
     box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
     border-radius: 10.3108px;
     margin-bottom: 36px;
-    
+    :hover {
+        box-shadow: inset 0 0 3px 3px #5cd3a8, 0 0 3px 3px #373737;
+    }
 `
 
 export const Tweets = styled.p`
